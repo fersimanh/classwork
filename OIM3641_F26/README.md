@@ -1,26 +1,61 @@
-# OIM 3641 Fall 2026 Class Repository
+# Fernando Siman — OIM 3641 Classwork
 
-All class demonstration files and problem set solutions will be found here.
+Senior at Babson College studying Business Administration. This repo tracks my coursework for OIM 3641 (AI App Development), including LLM API calls, retrieval-augmented generation demos, and Python fundamentals.
 
+## Skills & Tools
 
-### To get started install git on your computer to access files:
-1. Visit [https://git-scm.com](https://git-scm.com)
-2. Download and install the version for your operating system
-3. Windows: Be sure to install "Use Git from Windows Command Prompt"
-4. Leave defaults selected for remaining install options
-### To access files you can open them in the browser by clicking on the file desired, but it is best to copy them to your own computer:
-1. Locate the green code button and click it
-2. Copy the URL and open git bash (terminal for MAC OS)
-3. Type git clone and then paste the URL and hit enter
-4. Alternatively you can directly enter:
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 
-    `git clone https://github.com/mjmacarty/OIM3641_F26.git` 
+> More badge options: [markdown-badges](https://github.com/Ileriayo/markdown-badges#markdown-badges)
 
-*This method creates a folder with the contents of the github repo in your computer's home directory. If you prefer that it be located elsewhere, you can change the location with the cd command, e.g. cd Documents will put the repository in your Documents folder.* 
-### To update the folder on your computer:
-1. Launch git bash (terminal in MAC OS)
-2. Navigate to the repository on your computer
-3. Enter
+## Directory Structure
 
-    `git pull https://github.com/mjmacarty/OIM3641_F26.git`
+```
+.
+├── README.md                          # This file
+├── 01-llm-call.py                     # Basic Gemini API call example
+├── 02-python_concepts.ipynb           # Python fundamentals notebook (exercises)
+├── 03-demo_create_llamaindex.py       # Document ingestion → LlamaCloud index
+├── 03-demo_llama_retrieval.py         # Retrieval demo against a LlamaIndex
+├── 03-demo_llama_gemini_retrieval.py  # Retrieval + Gemini generation demo
+├── data/                              # Source documents and datasets used by demos
+└── random_integers.txt                # Sample data file
+```
 
+As the semester progresses, new exercises and project milestones will be added as additional numbered scripts/notebooks (e.g. `04-...`, `05-...`) or subfolders per assignment.
+
+## Install / Run Instructions
+
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/fersimanh/classwork.git
+   cd classwork
+   ```
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate   # Windows: .venv\Scripts\activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install python-dotenv google-genai llama-cloud-services jupyter
+   ```
+4. Create a `.env` file in the project root with your own API keys (never commit real keys):
+   ```
+   GEMINI_API_KEY=your-key-here
+   LLAMA_CLOUD_API_KEY=your-key-here
+   ```
+5. Run a script or open a notebook:
+   ```bash
+   python 01-llm-call.py
+   jupyter notebook 02-python_concepts.ipynb
+   ```
+
+## Contact / Connect
+
+- LinkedIn: [linkedin.com/in/fernandosimanh](https://linkedin.com/in/fernandosimanh)
+- GitHub: [github.com/fersimanh](https://github.com/fersimanh)
+- Email: [fernandosiman2012@gmail.com](mailto:fernandosiman2012@gmail.com)
