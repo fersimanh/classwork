@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+from altair import value
 import pandas as pd
 import plotly.express as px
 import streamlit as st
@@ -12,11 +13,11 @@ st.set_page_config(layout="wide",
 st.title("Stock Analysis")
 
 st.sidebar.title("Inputs")
-ticker = st.sidebar.text_input("Enter stock ticker symbol",
+ticker = st.sidebar.text_input(label="Enter stock ticker symbol",
                                value="AAPL", max_chars=5).upper()
 col1, col2 = st.sidebar.columns(2)
-start_date = col1.date_input("Start date", START)
-end_date = col2.date_input("End date", END)
+start_date = col1.date_input(label="Start date", value=START)
+end_date = col2.date_input(label="End date", value=END)
 mv_avg = st.sidebar.slider("Moving average window",
                            min_value= 1,
                              max_value= 100,
@@ -37,4 +38,53 @@ def get_stock_data(ticker, start_date, end_date):
 
 
 if run_analysis:
-    get_stock_data(ticker, start_date, end_date)
+    with st.spinner (f"Fetching data {ticker} data..."):
+        df, msg = get_stock_data(ticker, start_date, end_date)
+        if df is not None: 
+            st.sidebar.success(msg)
+        else:
+            st.sidebar.error(msg)
+            st.stop()
+        df ['MA'] = df['Close'].rolling(window=mv_avg).mean()
+        df['pct_change'] = df['Close'].pct_change() * 100
+        tab1, tab2, tab3, = st.tabs(["Chart", "Statistics", "Raw Data"])
+
+        with tab1: 
+            st. subheader(f"{ticker} Price Analysis")
+            col1, col2, col3 = st.columns(3)
+            col1.metric("Last Price", value=f"{df.Close.iloc[-1]:.2f}")
+            col2.metric("Cum. Change", value=f"{df.Close.iloc[-1]/df.Close.iloc[0]-1:.2%}")
+            col3.metric("Trading Days", value=f"{df.Close.count()}")
+            fig = px.line(df,y=['Close', 'MA'])
+            fig.update_layout(hovermode='x unified')
+            st.plotly_chart(fig, use_container_width=True)
+
+        with tab2:
+            st.subheader(f"{ticker} Statistics")
+            col1, col2, = st.columns(2)
+            with col1:
+                st.write("*Daily Change Stats*")
+                summary = df["pct_change"].describe()
+                st.dataframe(summary)
+
+            with col2:
+                price_stats = pd.DataFrame({
+                    'Metric': ['High', 'Low', 'Mean', 'Volatility'],
+                    'Values': [f"{df.Close.max():.2f}",
+                               f"{df.Close.min():.2f}",
+                               f"{df.Close.mean():.2f}",
+                               f"{df.Close.std():.2f}"
+                        ]
+                })
+                st.dataframe(price_stats)
+
+        with tab3:
+            st.subheader(f"{ticker} Raw Data")
+            csv = df.to_csv()
+            st.download_button(
+                label="Download Raw Data",
+                data=csv,
+                file_name=f"{ticker}_raw_data.csv",
+                mime="text/csv"
+            )
+            st.dataframe(df)
