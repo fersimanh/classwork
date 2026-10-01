@@ -15,17 +15,24 @@ Senior at Babson College studying Business Administration. This repo tracks my c
 
 ```
 .
-├── README.md                          # This file
-├── 01-llm-call.py                     # Basic Gemini API call example
-├── 02-python_concepts.ipynb           # Python fundamentals notebook (exercises)
-├── 03-demo_create_llamaindex.py       # Document ingestion → LlamaCloud index
-├── 03-demo_llama_retrieval.py         # Retrieval demo against a LlamaIndex
-├── 03-demo_llama_gemini_retrieval.py  # Retrieval + Gemini generation demo
-├── data/                              # Source documents and datasets used by demos
-└── random_integers.txt                # Sample data file
+├── README.md
+├── data/                                  # Shared source documents and datasets
+├── 01-llm-basics/
+│   └── 01-llm-call.py                     # Basic Gemini API call example
+├── 02-python-concepts/
+│   ├── 02-python_concepts.ipynb           # Python fundamentals notebook (exercises)
+│   └── random_integers.txt                # File the notebook writes/reads
+├── 03-rag-llamaindex/
+│   ├── 03-demo_create_llamaindex.py       # Document ingestion → LlamaCloud index
+│   ├── 03-demo_llama_retrieval.py         # Retrieval demo against a LlamaIndex
+│   └── 03-demo_llama_gemini_retrieval.py  # Retrieval + Gemini generation demo
+└── demo-streamlit/                        # Streamlit stock app (uv project)
+    ├── 06-streamlit-demo.py               # Streamlit app
+    ├── stock.py                           # Stock class used by the app
+    └── src/classwork/user.py              # User class (Outside Class Activity 7)
 ```
 
-As the semester progresses, new exercises and project milestones will be added as additional numbered scripts/notebooks (e.g. `04-...`, `05-...`) or subfolders per assignment.
+Each new topic or assignment gets its own numbered folder (e.g. `04-...`, `05-...`).
 
 ## Install / Run Instructions
 
@@ -50,8 +57,8 @@ As the semester progresses, new exercises and project milestones will be added a
    ```
 5. Run a script or open a notebook:
    ```bash
-   python 01-llm-call.py
-   jupyter notebook 02-python_concepts.ipynb
+   python 01-llm-basics/01-llm-call.py
+   jupyter notebook 02-python-concepts/02-python_concepts.ipynb
    ```
 
 ## Contact / Connect

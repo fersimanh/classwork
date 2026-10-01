@@ -9,11 +9,14 @@ from dotenv import load_dotenv
 from llama_cloud_services import LlamaCloudIndex
 from llama_cloud_services import LlamaParse
 import os
+from pathlib import Path
 
 load_dotenv()
 
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+
 parser = LlamaParse(api_key=os.getenv("LLAMA_CLOUD_API_KEY"))
-job_result = parser.parse('data/dartmouth_ai.pdf') #can also be a list of documents
+job_result = parser.parse(str(DATA_DIR / "dartmouth_ai.pdf")) #can also be a list of documents
 documents = job_result.get_text_documents() #returns a list even if only one document
 if documents:
     print(f"Successfully parsed beginning with {documents[0].text[:100]}: ")

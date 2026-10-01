@@ -266,6 +266,7 @@ name = "demo-streamlit"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "numpy" },
     { name = "plotly" },
     { name = "streamlit" },
     { name = "yfinance" },
@@ -273,6 +274,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "numpy", specifier = ">=2.5.3" },
     { name = "plotly", specifier = ">=7.1.0" },
     { name = "streamlit", specifier = ">=1.64.0" },
     { name = "yfinance", specifier = ">=1.7.0" },
