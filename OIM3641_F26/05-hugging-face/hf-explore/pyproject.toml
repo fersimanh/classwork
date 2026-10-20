@@ -1,0 +1,29 @@
+[project]
+name = "hf-explore"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "fersimanh", email = "fernandosiman2012@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "google-genai>=2.29.0",
+    "pandas>=3.0.6",
+    "python-dotenv>=1.2.4",
+    "streamlit>=1.65.0",
+    "torch>=2.14.1",
+    "transformers>=5.19.0",
+]
+
+[project.scripts]
+hf-explore = "hf_explore:main"
+
+[build-system]
+requires = ["uv_build>=0.12.7,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "jupyter>=1.1.1",
+]
